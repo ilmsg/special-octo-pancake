@@ -1,0 +1,43 @@
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <%= link_to "Navbar", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link", aria:{current: "page"} %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Blog", about_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "About", about_path, class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <% unless user_signed_in? %>
+            <li class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+            </li>
+        <% else %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= current_user.email %>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><%= link_to "New Post", about_path, class: "dropdown-item" %></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><%= link_to "Sign Out", destroy_user_session_path, class: "dropdown-item", "data-turbo-method": :delete %></li>
+                </ul>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
